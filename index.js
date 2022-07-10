@@ -3,11 +3,11 @@ require("dotenv").config();
 const express = require("express");
 
 //Routes
-const serverTimeRoutes = require("./routes/publicRouter");
+const publicRouter = require("./routes/publicRouter")
 
 // App
 const app = express();
-app.use('/',serverTimeRoutes)
+app.use('/',publicRouter)
 
 // Server
 const PORT = process.env.PORT || 3335

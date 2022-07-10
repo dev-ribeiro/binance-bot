@@ -1,9 +1,10 @@
 const api = require("../api/api");
 
-const publicFunction = async (endpoint, method = "GET") => {
+const publicFunction = async (endpoint, method = "GET", params = {}) => {
     let call = await api({
         url: endpoint,
-        method: method
+        method: method,
+        params: params
     }).then(response => { return response.data });
     return call
 };
@@ -13,4 +14,9 @@ const serverTime = async (req, res) => {
     res.json(result)
 };
 
-module.exports = { serverTime }
+const exchangeInformation = async (req, res) => {
+    let result = await publicFunction("/v3/exchangeInfo", "GET", {symbol:"BTCUSDT"});
+    res.json(result);
+};
+
+module.exports = { serverTime, exchangeInformation }
