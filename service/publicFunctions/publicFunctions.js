@@ -15,7 +15,8 @@ const serverTime = async (req, res) => {
 };
 
 const exchangeInformation = async (req, res) => {
-    let result = await publicFunction("/v3/exchangeInfo", "GET", {symbol:"BTCUSDT"});
+    let pair = await req.params.symbol;
+    let result = await publicFunction("/v3/exchangeInfo","GET",{symbol:pair});
     res.json(result);
 };
 
