@@ -1,3 +1,4 @@
+require("dotenv").config();
 const api = require("../api/api");
 
 const publicFunction = async (endpoint, method = "GET", params = {}) => {
@@ -16,8 +17,14 @@ const serverTime = async (req, res) => {
 
 const exchangeInformation = async (req, res) => {
     let pair = await req.params.symbol;
-    let result = await publicFunction("/v3/exchangeInfo","GET",{symbol:pair});
+    let result = await publicFunction("/v3/exchangeInfo", "GET", { symbol: pair });
     res.json(result);
 };
 
-module.exports = { serverTime, exchangeInformation }
+const orderBook = async (req, res) => {
+    let pair = await req.params.symbol;
+    let result = await publicFunction("/v3/depth","GET",{symbol:pair});
+    res.json(result)
+};
+
+module.exports = { serverTime, exchangeInformation, orderBook }
